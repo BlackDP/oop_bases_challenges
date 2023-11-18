@@ -10,8 +10,32 @@
 
 
 class BankAccount:
-    pass  # код писать тут
+    def __init__(self, owner_full_name: str, balance: float):
+        self.owner_full_name = owner_full_name
+        self.balance = balance
+
+    def increase_balance(self, income: float):
+        self.balance += income
+    
+    def reduce_balance(self, income: float):
+        self.balance -= income
+        if self.balance < 0:
+            raise ValueError('Баланс не может быть отрицательным')
+        # try:
+        #     self.balance -= income   
+        #     if self.balance < 0:
+        #         raise Exception('Баланс не может быть отрицательным')
+        #     return self.balance
+        # except Exception as e:
+        #     return e
 
 
 if __name__ == '__main__':
-    pass  # код писать тут
+    client1 = BankAccount(
+        owner_full_name='Иванов Иван Иванович',
+        balance=1000.00
+    )
+    client1.reduce_balance(500)
+    print(client1.balance)
+    client1.reduce_balance(1500)
+    print(client1.balance)
