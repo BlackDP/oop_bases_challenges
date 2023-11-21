@@ -24,7 +24,21 @@ class FoodProductMixin:
     def is_premium_food(self):
         return self.price > 10
 
+class FoodProduct(FoodProductMixin, Product):
+    def get_product_info(self):
+        if self.is_premium_food():
+            return f'Product title: {self.title}, price: {self.price} (Premium)'    
+        return super().get_product_info()
 
 if __name__ == '__main__':
-    pass  # код писать тут
-
+    product1 = FoodProduct(
+        title='Avocado',
+        price=12
+    )
+    print(product1.get_product_info())
+    
+    product2 = FoodProduct(
+        title='Mango',
+        price=9
+    )
+    print(product2.get_product_info())
