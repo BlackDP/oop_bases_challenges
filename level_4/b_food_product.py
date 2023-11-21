@@ -34,8 +34,7 @@ class FoodProduct(Product):
         return f'Product {self.title}, {self.quantity} in stock, Expiration Date {self.expiration_date}.'
     
     def is_available(self):
-        if datetime.strptime(self.expiration_date, '%Y/%m/%d') < datetime.now() and super().is_available:
-            return False 
+        return datetime.strptime(self.expiration_date, '%Y/%m/%d') > datetime.now() and super().is_available()
 
 
 if __name__ == '__main__':
@@ -49,7 +48,7 @@ if __name__ == '__main__':
     product2 = FoodProduct(
         title='Чай',
         quantity=10,
-        expiration_date='2023/11/20'
+        expiration_date='2023/11/22'
     )
     print(product2.get_full_info())
     print(product2.is_available())  
