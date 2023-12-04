@@ -21,13 +21,15 @@ class Form:
         return len(self.password) > 8
 
 
-class AuthorizationFormMixin:
+class AuthorizationFormMixin(Form):
     def valid_form(self):
-        pass  # писать код тут
+        return super().valid_form() and self.username in USERNAMES_IN_DB
 
 
-# писать код тут
+class AuthorizationForm(AuthorizationFormMixin, Form):
+    pass
 
 
 if __name__ == '__main__':
-    pass  # писать код тут
+    user = AuthorizationForm(username='EpicGamer', password='012345678')
+    print (user.valid_form())
